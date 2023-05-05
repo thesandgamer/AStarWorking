@@ -8,10 +8,29 @@ AStarHeuristics::AStarHeuristics()
 {
 }
 
+AStarHeuristics::AStarHeuristics(AStarGraph* link): graph{link}
+{
+}
+
 AStarHeuristics::~AStarHeuristics()
 {
 }
 
+float AStarHeuristics::CalculateFCost(AStarNode* StartNode, AStarNode* CurrentNode, AStarNode* EndNode)
+{
+    return CalculateGCost(CurrentNode, StartNode) + CalculateHCost(CurrentNode, EndNode);
+}
+
+
+float AStarHeuristics::CalculateHCost(AStarNode* CurrentNode, AStarNode* EndNode)
+{
+    return CalculateCost(CurrentNode, EndNode);
+}
+
+float AStarHeuristics::CalculateGCost(AStarNode* CurrentNode, AStarNode* StartNode)
+{
+    return CalculateCost(CurrentNode, StartNode);
+}
 
 /// <summary>
 /// To calculate cost from a node to another
@@ -33,6 +52,8 @@ float AStarHeuristics::CalculateCost(AStarNode* NodeA, AStarNode* NodeB)
     }
 
 }
+
+
 
 float AStarHeuristics::CalculateCostForGrid4Dir( AStarNode* NodeA,  AStarNode* NodeB)
 {

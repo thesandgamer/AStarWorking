@@ -30,27 +30,53 @@ void AStarGraph::AddObstacle()
 std::vector<AStarNode*> AStarGraph::CalculatePath(AStarNode* StartNode, AStarNode* EndNode)
 {
 
-	std::priority_queue<AStarNode*> OpenList;
+	std::priority_queue<AStarNode*> OpenList{};
 	std::priority_queue<AStarNode*> ClosedList{};
 
 	OpenList.push(StartNode);
 
-	while (!OpenList.empty())
+	while (!OpenList.empty())	//While we have nodes to explore
 	{
-		AStarNode* currentNode = OpenList.top();
+		AStarNode* currentNode = OpenList.top();	//We get the current node to explore
 		if (currentNode == EndNode) break;
 
-		for (AStarNode* next : currentNode->getNeighbors())
+		//Check all the neighbors
+		for (AStarNode* nextNode : currentNode->getNeighbors()) //For each neighbors node the node have
+		{
+			// cost so far = g;
+			// cost = w / d /l / length
+			// frontier = open
+			// double newCost = g current + cost of (current to next)
+
+			double newCost = heuristic.CalculateFCost(StartNode, nextNode, EndNode);
+			if (newCost < nextNode->cost)
+			{
+				OpenList.push(nextNode);
+			}
+		}
+
+
+		for (size_t i = 0; i < currentNode->getNeighbors().size(); i++)		
+		{
+			//cost = g(i) + movement cost(current, i)
+			//if i in Open et cost < gcost(i): 
+				//remove i et open
+			//if i dans closed an cost < g(i)
+				//remove i de closed
+			//if i not in Open and i not in cloed
+				//g(i) = cost
+				//i dans opend
+				//priorty que rank to g(i) + h (i): f(i)
+				
+		}
+		/*
+		for (AStarNode& next : currentNode.getNeighbors())
 		{
 			//Calcul du f cost du voisin
 			//Si ce cost < 
 		}
-
+		*/
 	}
-
-
-
-
 
 	return std::vector<AStarNode*>();
 }
@@ -94,6 +120,7 @@ void AStarGraph::SetGridNeighbors()
 	}
 
 }
+
 
 
 AStarNode* AStarGraph::FindNodeInList(AStarNode node)

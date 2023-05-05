@@ -20,35 +20,52 @@ struct GraphData
 	
 };
 
-
+/// <summary>
+/// 
+/// For now work only with Grid and tile movement
+/// </summary>
 class AStarGraph
 {
 public:
 
 	AStarGraph();
 	~AStarGraph();
+
 	void Init();
 
-	void AddObstacle();
 
+	void GenerateGridGraph(int width, int height);
+	std::vector<AStarNode*> CalculatePath(AStarNode* StartNode, AStarNode* EndNode);
+
+
+	//-----------------Modify Graph----------------//
+	void AddObstacle();
 	void SmoothingPath();
 
+	
+
+	//-----------------Acess Graph----------------//
 	void LinkNodeToNode(AStarNode* nodeA, AStarNode* nodeB);
 
 	AStarGraphType getGraphType() { return graphType; }
 	void setGraphType(AStarGraphType _graphType) { graphType = _graphType; }
 
-	std::vector<AStarNode*> CalculatePath(AStarNode* StartNode, AStarNode* EndNode);
-
-	//-----------------Graph----------------//
-	void GenerateGridGraph(int width, int height);
 	void SetGridNeighbors();
+
+	std::vector<AStarNode>& GetNodeList() { return nodeList; }
+
+	int GetGridWidth() { return gridWidth; }
+	int GetGridHeight() { return gridHeight; }
+
+	//I decide to use * so we can return nullptr, but we can also use reference with std::pair or std::boost and return a false
+	AStarNode* FindNodeInList(AStarNode node); //Can be replaced with another identifier	
 
 
 
 private:
 
-	AStarNode* FindNodeInList(AStarNode node); //Can be replaced with another identifier
+	int gridWidth{ 0 };
+	int gridHeight{ 0 };
 
 	void SetGridNeighbors4Dir();
 	void SetGridNeighbors8Dir();
@@ -57,25 +74,14 @@ private:
 	AStarGraphType graphType{AStarGraphType::Grid4Dir};
 
 
-	bool breakTie{false};
-	bool weightedGraph{ false };
+	std::vector<AStarNode> nodeList;	//List of all the nodes in the graph
 
-	/*
-	AStarNode* StartNode{ nullptr };
-	AStarNode* EndNode{ nullptr };*/
-
-	std::vector<AStarNode> nodeList;
-
-	/// <summary>
-	/// To Have ????
-	/// </summary>
 	bool unidirectional{ false };
 
-	AStarHeuristics heuritic;
+	AStarHeuristics heuristic{this};
 
 
-	int gridWidth{ 0 };
-	int gridHeight{ 0 };
+
 
 };
 
