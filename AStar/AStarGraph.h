@@ -56,6 +56,7 @@ private:
 
 	AStarGraphType graphType{AStarGraphType::Grid4Dir};
 
+
 	bool breakTie{false};
 	bool weightedGraph{ false };
 
@@ -65,6 +66,9 @@ private:
 
 	std::vector<AStarNode> nodeList;
 
+	/// <summary>
+	/// To Have ????
+	/// </summary>
 	bool unidirectional{ false };
 
 	AStarHeuristics heuritic;

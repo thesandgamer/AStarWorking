@@ -6,7 +6,9 @@
 class AStarGraph;
 class AStarNode;
 
-
+/// <summary>
+/// Allow Calculation of cost to a Node to another Node
+/// </summary>
 class AStarHeuristics
 {
 public:

@@ -6,6 +6,10 @@
 #include <memory>
 #include <vector>
 
+
+/// <summary>
+/// 
+/// </summary>
 class AStarNode
 {
 public:
@@ -16,18 +20,19 @@ public:
 	void Init();
 
 
-
-	int getX() { return x; }
-	int getY() { return y; }
-	void setX(int _x) { x = _x; }
-	void setY(int _y) { y = _y; }
-
 	float getMoveCost() { return moveCost; }
 	float getDiagonalCost() { return diagonalCost; }
+
 
 	void AddNeighbor(AStarNode* neighbor);
 	std::vector<AStarNode*> getNeighbors() { return neighbors; }
 
+
+	//=========] For position
+	int getX() { return x; }
+	int getY() { return y; }
+	void setX(int _x) { x = _x; }
+	void setY(int _y) { y = _y; }
 
 
 private:
@@ -35,6 +40,7 @@ private:
 	int y{ 0 };
 
 	float moveCost{ 1 };
+	//++Question: are we put the diagonal cost of movement in node or in Heurstic
 	float diagonalCost{ std::sqrt(moveCost) };
 
 
@@ -43,7 +49,9 @@ private:
 	std::vector<AStarNode*> neighbors;
 	//std::vector<std::unique_ptr<AStarNode>> neighbors;
 
-	//--------------Overload Operators------------------------//
+
+
+//------------------------] Overload Operators [------------------------//
 public:
 
 	bool operator==(const AStarNode& other)

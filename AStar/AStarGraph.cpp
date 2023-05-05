@@ -20,6 +20,13 @@ void AStarGraph::AddObstacle()
 {
 }
 
+
+/// <summary>
+/// Calculate path beteween two node
+/// </summary>
+/// <param name="StartNode"></param>
+/// <param name="EndNode"></param>
+/// <returns></returns>
 std::vector<AStarNode*> AStarGraph::CalculatePath(AStarNode* StartNode, AStarNode* EndNode)
 {
 
@@ -48,6 +55,11 @@ std::vector<AStarNode*> AStarGraph::CalculatePath(AStarNode* StartNode, AStarNod
 	return std::vector<AStarNode*>();
 }
 
+/// <summary>
+/// Create a Grid Graph for A* calculation
+/// </summary>
+/// <param name="width"></param>
+/// <param name="height"></param>
 void AStarGraph::GenerateGridGraph(int width, int height)
 {
 	gridWidth = width;
